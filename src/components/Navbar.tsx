@@ -17,8 +17,8 @@ export function Navbar() {
   const navigate = useNavigate();
   
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 py-2">
-      <div className="container flex h-14 items-center justify-between">
+    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 py-2 mx-auto flex justify-center">
+      <div className="flex h-14 items-center justify-between w-full">
         <Link 
           to="/" 
           className="flex items-center space-x-2"

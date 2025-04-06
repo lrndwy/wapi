@@ -8,7 +8,9 @@ interface AdminLayoutProps {
 export function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <div className="min-h-screen">
-      <Navbar />
+      
+        <Navbar />
+      
       <div className="flex">
         <AdminSidebar />
         <main className="flex-1 p-8">

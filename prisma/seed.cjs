@@ -62,10 +62,10 @@ async function main() {
   // Buat akun admin
   const passwordHash = await hash('Hexanest@2024', 10);
   const admin = await prisma.user.upsert({
-    where: { email: 'hexanest@hexanest.com' },
+    where: { email: 'hexanest@hexanest.id' },
     update: { role: 'admin' },
     create: {
-      email: 'hexanest@hexanest.com',
+      email: 'hexanest@hexanest.id',
       password: passwordHash,
       name: 'Hexanest Admin',
       role: 'admin',
