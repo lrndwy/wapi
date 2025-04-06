@@ -41,7 +41,7 @@ export function WhatsAppAPIDoc({ accountId, apiKey }: WhatsAppAPIDocProps) {
         "Content-Type": "application/json",
         "X-API-Key": apiKey
       },
-      curl: `curl -X POST 'http://localhost:3030/api/whatsapp/messages' \\
+      curl: `curl -X POST 'http://localhost:3000/api/whatsapp/messages' \\
   -H 'Content-Type: application/json' \\
   -H 'X-API-Key: ${showKey ? apiKey : "YOUR_API_KEY"}' \\
   -d '{
@@ -62,7 +62,7 @@ export function WhatsAppAPIDoc({ accountId, apiKey }: WhatsAppAPIDocProps) {
         "Content-Type": "application/json",
         "X-API-Key": apiKey
       },
-      curl: `curl -X POST 'http://localhost:3030/api/whatsapp/reply' \\
+      curl: `curl -X POST 'http://localhost:3000/api/whatsapp/reply' \\
   -H 'Content-Type: application/json' \\
   -H 'X-API-Key: ${showKey ? apiKey : "YOUR_API_KEY"}' \\
   -d '{

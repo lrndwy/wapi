@@ -16,7 +16,7 @@ export function useWebSocket(onMessage: (data: any) => void) {
       try {
         console.log("Attempting to connect WebSocket...");
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const host = window.location.host || 'localhost:3030';
+        const host = window.location.host || 'localhost:3000';
         const wsUrl = `${protocol}//${host}/ws`;
         console.log("WebSocket URL:", wsUrl);
         console.log("Using token:", token.substring(0, 10) + "...");

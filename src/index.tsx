@@ -101,7 +101,7 @@ export const sendToUser = (userId: string, message: any) => {
 };
 
 const server = serve({
-  port: 3030,
+  port: 3000,
   websocket: {
     message: (ws: ServerWebSocket<WebSocketData>, message: string) => {
       console.log("WebSocket message received:", message);

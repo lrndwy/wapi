@@ -19,7 +19,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
     if (!token) return;
     
     try {
-      ws.current = new WebSocket(`ws://localhost:3030/ws`, token);
+      ws.current = new WebSocket(`ws://localhost:3000/ws`, token);
 
       ws.current.onopen = () => {
         console.log("WebSocket connected");
