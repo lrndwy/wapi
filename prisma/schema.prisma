@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String
+  name          String
+  role          String    @default("user")
+  planId        String    @default("starter")
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastLogin     DateTime?
+  whatsAppAccounts WhatsAppAccount[]
+  apiKeys       APIKey[]
+  messages      WhatsAppMessage[]
+  plan          Plan?     @relation(fields: [planId], references: [id])
+  auditLogs     AuditLog[]
+  messagesSentThisMonth Int       @default(0)
+}
+
+model Plan {
+  id          String    @id
+  name        String
+  price       String
+  period      String?
+  maxAccounts Int       @default(1)
+  maxMessages Int       @default(1000)
+  features    String    // menyimpan fitur sebagai JSON string
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  users       User[]
+}
+
+model WhatsAppAccount {
+  id            String    @id @default(uuid())
+  name          String    // nama untuk identifikasi akun
+  phoneNumber   String?   // Tambahkan ini jika belum ada
+  status        String    // CONNECTED, DISCONNECTED, CONNECTING
+  qrCode        String?   // untuk menyimpan QR code sementara
+  sessionData   String?   // untuk menyimpan data sesi whatsapp
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastActive    DateTime?
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  apiKeys       APIKey[]
+  messages      WhatsAppMessage[]
+  webhookUrl    String?   // tambahkan field ini
+}
+
+model APIKey {
+  id              String    @id @default(uuid())
+  key             String    @unique
+  name            String    // nama untuk identifikasi API key
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  lastUsed        DateTime?
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  whatsappAccount WhatsAppAccount @relation(fields: [whatsappId], references: [id], onDelete: Cascade)
+  whatsappId      String
+}
+
+model WhatsAppMessage {
+  id               String          @id @default(uuid())
+  user             User            @relation(fields: [userId], references: [id])
+  userId           String
+  whatsAppAccount  WhatsAppAccount @relation(fields: [whatsAppAccountId], references: [id])
+  whatsAppAccountId String
+  to               String?
+  message          String
+  sender           String
+  status           String          // RECEIVED, SENT, DELIVERED, READ
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+model AuditLog {
+  id          String    @id @default(uuid())
+  userId      String    // ID user yang melakukan aksi
+  action      String    // Jenis aksi yang dilakukan
+  category    String    // Kategori aksi (AUTH, USER, WHATSAPP, PLAN, API, dll)
+  description String    // Deskripsi detail aksi
+  metadata    String?   // Data tambahan dalam format JSON
+  ipAddress   String?   // Alamat IP
+  userAgent   String?   // User agent browser
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+}

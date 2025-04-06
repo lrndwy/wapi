@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  wa-web:
+    build: .
+    container_name: wa-web
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./.wwebjs_auth:/app/.wwebjs_auth
+      - ./.wwebjs_cache:/app/.wwebjs_cache
+      - ./whatsapp-sessions:/app/whatsapp-sessions
+    environment:
+      - DATABASE_URL=file:/app/prisma/dev.db
+      - NODE_ENV=production
+      - JWT_SECRET=your_jwt_secret_here
+    restart: unless-stopped 
