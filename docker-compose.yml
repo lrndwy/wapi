@@ -5,7 +5,7 @@ services:
     build: .
     container_name: wa-web
     ports:
-      - "3030:3030"
+      - "3000:3000"
     volumes:
       - ./.wwebjs_auth:/app/.wwebjs_auth
       - ./.wwebjs_cache:/app/.wwebjs_cache
