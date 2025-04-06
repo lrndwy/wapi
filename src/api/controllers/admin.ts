@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { authMiddleware } from "../middleware/auth";
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
 import { createAuditLog, AuditCategory, getRequestInfo } from "../../utils/audit-logger";
 
 

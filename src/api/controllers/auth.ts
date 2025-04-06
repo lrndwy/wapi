@@ -1,4 +1,4 @@
-import { hash, compare } from "bcrypt";
+import { hash, compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 import { createAuditLog, AuditCategory, getRequestInfo } from "../../utils/audit-logger";

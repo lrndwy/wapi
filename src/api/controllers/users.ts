@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { authMiddleware } from "@/api/middleware/auth";
 import { checkPlanLimits } from "@/utils/planLimits";
-import { compare, hash } from "bcrypt";
+import { compare, hash } from "bcryptjs";
+import { sign } from "jsonwebtoken";
 const prismaClient = new PrismaClient();
 
 export const updateProfile = async (req: Request) => {

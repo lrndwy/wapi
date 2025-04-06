@@ -20,7 +20,7 @@ import { getCurrentSubscription } from "./api/controllers/subscription";
 import { getUsageStats } from "./api/controllers/subscription";
 import { getUser } from "./api/controllers/users";
 import { getAllPlans } from "@/api/controllers/plans";
-import { compare, hash } from "bcrypt";
+import { compare, hash } from "bcryptjs";
 
 const prisma = new PrismaClient();
 
