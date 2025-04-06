@@ -42,4 +42,4 @@ RUN chown -R 1000:1000 /app
 # Gunakan non-root user
 USER 1000:1000
 
-CMD ["bun", "run", "dev"]
+CMD ["bun", "start"]
